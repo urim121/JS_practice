@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Header</h1>
+  <footer>Footer</footer>
+  <script>
+    items = document.querySelectorAll('body > *')
+    console.log(items); 
+    for(item of items) {
+      //이벤트 기본형태        행위     기능
+      item.addEventListener('click',(e) => {
+        console.dir(e.target.innerHTML)
+        e.target.remove()
+      })
+    }
+    addEventListener()
+    //const obj = document.querySelector('h1');
+    //obj.remove();
+
+    // document.body.removeChild(obj);
+    // obj.parentNode.removeChild(obj);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <button onclick="stop()">멈춤</button>
+  <script>
+    const f = function() {
+      console.log('실행!')
+    }
+    setTimeout(f, 5000) //원하는 시간 지정 후 실행
+    function f2() {
+      date = new Date()
+      min = date.getMinutes()
+      sec = date.getSeconds()
+      console.log(min, sec);
+    }
+    id = setInterval(f2, 1000) //원하는 시간 마다 반복 실행
+
+    function stop() {
+      clearInterval(id) //setInterval 멈춤
+    }
+  </script>
+</body>

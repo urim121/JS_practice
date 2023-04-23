@@ -1,0 +1,52 @@
+<body>
+  <div id="map" style="width:500px;height:400px;"></div>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da146a2a6ff6a54903c1d2a7caecd1c7"></script>
+
+  <script>
+    var map
+    function makeMap() {
+      var container = document.getElementById('map');
+      var options = {
+        center: new kakao.maps.LatLng(36.6, 127.3),
+        level: 3
+      };
+       map = new kakao.maps.Map(container, options);
+    }
+    makeMap()
+
+    function makeMaker(lat, lng) {
+      var markerPosition =
+        new kakao.maps.LatLng(lat, lng);
+      var marker = new kakao.maps.Marker({
+        position: markerPosition
+      });
+      marker.setMap(map);
+    }
+
+    let data =
+      fetch('http://ggoreb.com/api/data.jsp')
+    data.then((a) => {
+      return a.json()
+    }).then(function (data_list) {
+      let code = '<ul>'
+      for (let i = 0; i < data_list.length; i++) {
+        const data = data_list[i];
+        let name = data['name']
+        let lat = data['lat']
+        let lng = data['lng']
+        makeMaker(lat, lng)
+        //console.log(name);
+        code += `<li>${name}</li>`
+      }
+      code += '</ul>'
+      //let body = document.querySelector('body')
+      //body.innerHTML += code
+    }) //html ul > li 구성을 for문 JS로 작성
+
+    let items = [10, 20, 30]
+    for (let i = 0; i < items.length; i++) {
+      let item = items[i]
+      console.log(item);
+    }
+  </script>
+</body>

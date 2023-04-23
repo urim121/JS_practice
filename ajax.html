@@ -1,0 +1,37 @@
+<body>
+  <div id="videos"></div>
+  <script>
+    const ajax = fetch('http://ggoreb.com/api/youtube.jsp');
+    ajax.then(function (response) {
+      return response.json();
+    }).then(function (result) {
+      items = result['items']
+      code = ''
+      for(let i = 0; i < items.length; i++) {
+        item = items[i]
+        videoId = item['id']['videoId']
+        title = item['snippet']['title']
+        url = item['snippet']['thumbnails']['default']['url']
+        vurl = `http://www.youtube.com/watch?v=${videoId}`;
+        //console.log(title);
+        code += `
+        <img src ="${url}"><br>
+        <a href='${url}' target='blank'>${title}</a>
+        <br>
+        `
+      }
+    videosDiv = document.getElementById('videos');
+    videosDiv.innerHTML = code;
+
+    videoLinks = document.querySelectorAll('#videos a');
+    videoLinks.forEach(link => {
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+        vurl = this.href;
+        embedUrl = vurl.replace('watch?v=', 'embed/');})
+
+    body = document.querySelector('body')
+    body.innerHTML += code;})
+    });
+  </script>
+</body>
